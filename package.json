@@ -1,7 +1,7 @@
 {
   "name": "clean-node-api",
   "version": "1.2.0",
-  "description": "",
+  "description": "Survey API for studies on Clean Architecture and SOLID from an Udemy Course",
   "main": "index.js",
   "scripts": {
     "start": "node dist/main/server.js",
@@ -16,8 +16,11 @@
     "test:staged": "npm test -- --findRelatedTests",
     "test:ci": "npm test -- --coverage"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "node",
+    "typescript"
+  ],
+  "author": "Ianka Karúzia",
   "license": "ISC",
   "devDependencies": {
     "@shelf/jest-mongodb": "^1.1.5",
