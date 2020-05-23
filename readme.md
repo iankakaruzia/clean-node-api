@@ -1,8 +1,5 @@
-[![Build Status](https://travis-ci.org/rmanguinho/clean-ts-api.svg?branch=master)](https://travis-ci.org/iankakaruzia/clean-node-api)
+[![Build Status](https://travis-ci.org/iankakaruzia/clean-node-api.svg?branch=master)](https://travis-ci.org/iankakaruzia/clean-node-api)
 [![Coverage Status](https://coveralls.io/repos/github/iankakaruzia/clean-node-api/badge.svg?branch=master)](https://coveralls.io/github/iankakaruzia/clean-node-api?branch=master)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com)
-[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
-[![Open Source](https://badges.frapsoft.com/os/v1/open-source.svg?v=103)](https://opensource.org/)
 
 # **Clean Node API**
 
