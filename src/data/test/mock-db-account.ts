@@ -9,7 +9,7 @@ import { AccountModel } from '@/domain/models/account'
 export const mockAddAccountRepository = (): AddAccountRepository => {
   class AddAccountRepositoryStub implements AddAccountRepository {
     async add (accountData: AddAccountParams): Promise<AccountModel> {
-      return new Promise(resolve => resolve(mockAccountModel()))
+      return mockAccountModel()
     }
   }
   return new AddAccountRepositoryStub()

@@ -34,7 +34,7 @@ export const mockEncrypter = (): Encrypter => {
 export const mockHasher = (): Hasher => {
   class HasherStub implements Hasher {
     async hash (value: string): Promise<string> {
-      return new Promise(resolve => resolve('hashed_password'))
+      return 'hashed_password'
     }
   }
   return new HasherStub()
