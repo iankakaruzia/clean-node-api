@@ -1,6 +1,6 @@
 import { Collection, ObjectId } from 'mongodb'
 import { SurveyResultMongoRepository } from './survey-result-mongo-repository'
-import { MongoHelper } from '../helpers/mongo-helper'
+import { MongoHelper } from '../helpers'
 import { SurveyModel } from '@/domain/models/survey'
 import { AccountModel } from '@/domain/models/account'
 
