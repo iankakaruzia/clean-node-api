@@ -8,7 +8,7 @@ import { MongoHelper } from '@/infra/db/mongodb/helpers/mongo-helper'
 let surveyCollection: Collection
 let accountCollection: Collection
 
-const makeAccessToken = async (): Promise<string> => {
+const mockAccessToken = async (): Promise<string> => {
   const res = await accountCollection.insertOne({
     name: 'Ianka',
     email: 'ianka@mail.com',
@@ -65,7 +65,7 @@ describe('Survey Routes', () => {
         ],
         date: new Date()
       })
-      const accessToken = await makeAccessToken()
+      const accessToken = await mockAccessToken()
       await request(app)
         .put(`/api/surveys/${res.ops[0]._id}/results`)
         .set('x-access-token', accessToken)
