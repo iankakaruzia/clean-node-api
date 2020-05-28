@@ -1,6 +1,6 @@
 {
   "name": "clean-node-api",
-  "version": "1.9.1",
+  "version": "1.9.2",
   "description": "Survey API for studies on Clean Architecture and SOLID from an Udemy Course",
   "main": "index.js",
   "scripts": {
