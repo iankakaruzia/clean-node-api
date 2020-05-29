@@ -2,17 +2,14 @@ import { Collection } from 'mongodb'
 import { SurveyMongoRepository } from './survey-mongo-repository'
 import { MongoHelper } from '../helpers/mongo-helper'
 import { AccountModel } from '@/domain/models/account'
+import { mockAddSurveyParams, mockAddAccountParams } from '@/domain/test'
 
 let surveyCollection: Collection
 let surveyResultCollection: Collection
 let accountCollection: Collection
 
 const mockAccount = async (): Promise<AccountModel> => {
-  const res = await accountCollection.insertOne({
-    name: 'any_name',
-    email: 'any_email@mail.com',
-    password: '12345'
-  })
+  const res = await accountCollection.insertOne(mockAddAccountParams())
   return MongoHelper.map(res.ops[0])
 }
 
@@ -20,7 +17,7 @@ const makeSut = (): SurveyMongoRepository => {
   return new SurveyMongoRepository()
 }
 
-describe('Survey Mongo Repository', () => {
+describe('SurveyMongoRepository', () => {
   beforeAll(async () => {
     await MongoHelper.connect(process.env.MONGO_URL)
   })
@@ -41,48 +38,18 @@ describe('Survey Mongo Repository', () => {
   describe('add()', () => {
     test('Should add a survey on success', async () => {
       const sut = makeSut()
-      await sut.add({
-        question: 'any_question',
-        answers: [
-          {
-            image: 'any_image',
-            answer: 'any_answer'
-          },
-          {
-            answer: 'other_answer'
-          }
-        ],
-        date: new Date()
-      })
-
-      const survey = await surveyCollection.findOne({ question: 'any_question' })
-      expect(survey).toBeTruthy()
+      await sut.add(mockAddSurveyParams())
+      const count = await surveyCollection.countDocuments()
+      expect(count).toBe(1)
     })
   })
 
   describe('loadAll()', () => {
     test('Should load all surveys on success', async () => {
       const account = await mockAccount()
-      const res = await surveyCollection.insertMany([{
-        question: 'any_question',
-        answers: [
-          {
-            image: 'any_image',
-            answer: 'any_answer'
-          }
-        ],
-        date: new Date()
-      }, {
-        question: 'other_question',
-        answers: [
-          {
-            image: 'other_image',
-            answer: 'other_answer'
-          }
-        ],
-        date: new Date()
-      }])
-      const survey = res.ops[0]
+      const addSurveyModels = [mockAddSurveyParams(), mockAddSurveyParams()]
+      const result = await surveyCollection.insertMany(addSurveyModels)
+      const survey = result.ops[0]
       await surveyResultCollection.insertOne({
         surveyId: survey._id,
         accountId: account.id,
@@ -94,8 +61,10 @@ describe('Survey Mongo Repository', () => {
 
       expect(surveys.length).toBe(2)
       expect(surveys[0].id).toBeTruthy()
-      expect(surveys[0].question).toBe('any_question')
+      expect(surveys[0].question).toBe(addSurveyModels[0].question)
       expect(surveys[0].didAnswer).toBe(true)
+      expect(surveys[1].question).toBe(addSurveyModels[1].question)
+      expect(surveys[1].didAnswer).toBe(false)
     })
 
     test('Should load empty list', async () => {
@@ -108,17 +77,8 @@ describe('Survey Mongo Repository', () => {
   })
 
   describe('loadById()', () => {
-    test('Should load durvey by id surveys on success', async () => {
-      const res = await surveyCollection.insertOne({
-        question: 'any_question',
-        answers: [
-          {
-            image: 'any_image',
-            answer: 'any_answer'
-          }
-        ],
-        date: new Date()
-      })
+    test('Should load survey by id on success', async () => {
+      const res = await surveyCollection.insertOne(mockAddSurveyParams())
       const sut = makeSut()
       const survey = await sut.loadById(res.ops[0]._id)
 
