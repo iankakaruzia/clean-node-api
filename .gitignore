@@ -4,5 +4,8 @@ coverage
 data
 
 !src/data
+!tests/data
 
 .vscode
+
+globalConfig.json
