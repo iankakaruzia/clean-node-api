@@ -101,9 +101,6 @@ describe('AccountMongoRepository', () => {
 
       expect(account).toBeTruthy()
       expect(account.id).toBeTruthy()
-      expect(account.name).toBe(name)
-      expect(account.email).toBe(email)
-      expect(account.password).toBe(password)
     })
 
     test('Should return an account on loadByToken with admin role', async () => {
@@ -119,9 +116,6 @@ describe('AccountMongoRepository', () => {
 
       expect(account).toBeTruthy()
       expect(account.id).toBeTruthy()
-      expect(account.name).toBe(name)
-      expect(account.email).toBe(email)
-      expect(account.password).toBe(password)
     })
 
     test('Should return null on loadByToken with invalid role', async () => {
@@ -150,9 +144,6 @@ describe('AccountMongoRepository', () => {
 
       expect(account).toBeTruthy()
       expect(account.id).toBeTruthy()
-      expect(account.name).toBe(name)
-      expect(account.email).toBe(email)
-      expect(account.password).toBe(password)
     })
 
     test('Should return null if loadByToken fails', async () => {
