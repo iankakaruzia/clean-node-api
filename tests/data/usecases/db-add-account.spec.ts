@@ -1,6 +1,7 @@
+import faker from 'faker'
 import { DbAddAccount } from '@/data/usecases'
 import { HasherSpy, AddAccountRepositorySpy, LoadAccountByEmailRepositorySpy } from '@/../tests/data/mocks'
-import { mockAccountModel, mockAddAccountParams, throwError } from '@/../tests/domain/mocks'
+import { mockAddAccountParams, throwError } from '@/../tests/domain/mocks'
 
 type SutTypes = {
   sut: DbAddAccount
@@ -12,7 +13,7 @@ type SutTypes = {
 const makeSut = (): SutTypes => {
   const hasherSpy = new HasherSpy()
   const loadAccountByEmailRepositorySpy = new LoadAccountByEmailRepositorySpy()
-  loadAccountByEmailRepositorySpy.accountModel = null
+  loadAccountByEmailRepositorySpy.result = null
   const addAccountRepositorySpy = new AddAccountRepositorySpy()
   const sut = new DbAddAccount(hasherSpy, addAccountRepositorySpy, loadAccountByEmailRepositorySpy)
 
@@ -68,6 +69,14 @@ describe('DbAddAccount UseCase', () => {
     expect(isValid).toBe(true)
   })
 
+  test('Should return false if AddAccountRepository returns false', async () => {
+    const { sut, addAccountRepositorySpy } = makeSut()
+    addAccountRepositorySpy.result = false
+    const isValid = await sut.add(mockAddAccountParams())
+
+    expect(isValid).toBe(false)
+  })
+
   test('Should call LoadAccountByEmailRepository with correct email', async () => {
     const { sut, loadAccountByEmailRepositorySpy } = makeSut()
     const addAccountParams = mockAddAccountParams()
@@ -78,7 +87,11 @@ describe('DbAddAccount UseCase', () => {
 
   test('Should return false if LoadAccountByEmailRepository returns an account', async () => {
     const { sut, loadAccountByEmailRepositorySpy } = makeSut()
-    loadAccountByEmailRepositorySpy.accountModel = mockAccountModel()
+    loadAccountByEmailRepositorySpy.result = {
+      id: faker.random.uuid(),
+      name: faker.name.findName(),
+      password: faker.internet.password()
+    }
     const isValid = await sut.add(mockAddAccountParams())
 
     expect(isValid).toBe(false)
