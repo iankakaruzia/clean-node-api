@@ -3,10 +3,10 @@ import { SaveSurveyResult } from '@/domain/usecases'
 import { mockSurveyResultModel } from '@/../tests/domain/mocks'
 
 export class SaveSurveyResultRepositorySpy implements SaveSurveyResultRepository {
-  saveSurveyResultParams: SaveSurveyResult.Params
+  params: SaveSurveyResult.Params
 
-  async save (data: SaveSurveyResult.Params): Promise<void> {
-    this.saveSurveyResultParams = data
+  async save (params: SaveSurveyResult.Params): Promise<void> {
+    this.params = params
   }
 }
 

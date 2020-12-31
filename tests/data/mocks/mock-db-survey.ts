@@ -5,10 +5,10 @@ import { SurveyModel } from '@/domain/models'
 import { mockSurveyModel, mockSurveyModels } from '@/../tests/domain/mocks'
 
 export class AddSurveyRepositorySpy implements AddSurveyRepository {
-  addSurveyParams: AddSurveyRepository.Params
+  params: AddSurveyRepository.Params
 
-  async add (data: AddSurveyRepository.Params): Promise<void> {
-    this.addSurveyParams = data
+  async add (params: AddSurveyRepository.Params): Promise<void> {
+    this.params = params
     return Promise.resolve()
   }
 }
@@ -44,11 +44,11 @@ export class CheckSurveyByIdRepositorySpy implements CheckSurveyByIdRepository {
 }
 
 export class LoadSurveysRepositorySpy implements LoadSurveysRepository {
-  surveyModels = mockSurveyModels()
+  result = mockSurveyModels()
   accountId: string
 
   async loadAll (accountId: string): Promise<SurveyModel[]> {
     this.accountId = accountId
-    return this.surveyModels
+    return this.result
   }
 }
