@@ -1,8 +1,8 @@
 import MockDate from 'mockdate'
 import faker from 'faker'
 import { DbLoadSurveyResult } from '@/data/usecases'
-import { LoadSurveyResultRepositorySpy, LoadSurveyByIdRepositorySpy } from '@/../tests/data/mocks'
-import { throwError } from '@/../tests/domain/mocks'
+import { LoadSurveyResultRepositorySpy, LoadSurveyByIdRepositorySpy } from '@/tests/data/mocks'
+import { throwError } from '@/tests/domain/mocks'
 
 type SutTypes = {
   sut: DbLoadSurveyResult

@@ -2,7 +2,7 @@ import { Collection } from 'mongodb'
 import FakeObjectId from 'bson-objectid'
 
 import { SurveyMongoRepository, MongoHelper } from '@/infra/db'
-import { mockAddSurveyParams, mockAddAccountParams } from '@/../tests/domain/mocks'
+import { mockAddSurveyParams, mockAddAccountParams } from '@/tests/domain/mocks'
 
 let surveyCollection: Collection
 let surveyResultCollection: Collection

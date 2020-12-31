@@ -1,7 +1,7 @@
 import faker from 'faker'
 import { DbLoadAnswersBySurvey } from '@/data/usecases'
-import { throwError } from '@/../tests/domain/mocks'
-import { LoadAnswersBySurveyRepositorySpy } from '@/../tests/data/mocks'
+import { throwError } from '@/tests/domain/mocks'
+import { LoadAnswersBySurveyRepositorySpy } from '@/tests/data/mocks'
 
 type SutTypes = {
   sut: DbLoadAnswersBySurvey
